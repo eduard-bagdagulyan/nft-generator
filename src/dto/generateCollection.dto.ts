@@ -1,4 +1,15 @@
-import { IsNotEmpty, IsArray } from 'class-validator';
+import { IsNotEmpty, IsArray, IsInt, ValidateNested } from 'class-validator';
+import { Type } from 'class-transformer';
+
+class Format {
+  @IsInt()
+  width: number;
+
+  @IsInt()
+  height: number;
+
+  smoothness: string;
+}
 
 export class GenerateCollectionDto {
   id?: string;
@@ -6,19 +17,21 @@ export class GenerateCollectionDto {
   @IsNotEmpty()
   name: string;
 
-  // @IsNotEmpty()
+  @IsNotEmpty()
   description: string;
 
-  // @IsNotEmpty()
+  @IsNotEmpty()
   collectionSize: number;
 
-  // @IsNotEmpty()
-  format: { white: number; height: number };
+  @IsNotEmpty()
+  @ValidateNested()
+  @Type(() => Format)
+  format: Format;
 
-  // @IsNotEmpty()
+  @IsNotEmpty()
   baseUrl: string;
 
-  // @IsNotEmpty()
+  @IsNotEmpty()
   @IsArray()
   layers: [
     {
@@ -39,4 +52,5 @@ export class GenerateCollectionDto {
   incompatibles?: object;
 
   forcedCombinations?: object;
+  base64: string;
 }

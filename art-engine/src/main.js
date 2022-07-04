@@ -8,33 +8,8 @@ const chalk = require("chalk");
 
 const { createCanvas, loadImage } = require("canvas")
 
-// console.log(path.join(basePath, "/src/config.js"));
-// const {
-//   background,
-//   baseUri,
-//   buildDir,
-//   debugLogs,
-//   description,
-//   emptyLayerName,
-//   extraAttributes,
-//   extraMetadata,
-//   forcedCombinations,
-//   format,
-//   hashImages,
-//   incompatible,
-//   layerConfigurations,
-//   layersDir,
-//   outputJPEG,
-//   rarityDelimiter,
-//   shuffleLayerConfigurations,
-//   startIndex,
-//   traitValueOverrides,
-//   uniqueDnaTorrance,
-//   useRootTraitType,
-// } = require(path.join(basePath, "/src/config.js"));
 
-
-const generateCollection = async (config) => {
+const generateCollection = async (config, dna) => {
   const {
     background,
     baseUri,
@@ -896,7 +871,7 @@ const generateCollection = async (config) => {
     writeDnaLog(JSON.stringify([...dnaList], null, 2));
   };
   buildSetup()
-  await startCreating(null)
+  await startCreating(dna)
 }
 
 module.exports = {
